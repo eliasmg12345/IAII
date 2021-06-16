@@ -9,21 +9,20 @@ print(dataset.keys())
 # SE OBTIENE LAS CARACTERÍSTICAS DEL DATASET
 print('Características del dataset:')
 print(dataset.DESCR)
-entrada=["radius","texture",
-"perimeter","área","smoothness",
-"compactness","concavity",
-"concave points","symmetry","fractal dimensión","radius","texture",
-"perimeter","área","smoothness",
-"compactness","concavity",
-"concave points","symmetry",
-"fractal dimensión","radius","texture",
-"perimeter","área","smoothness",
-"compactness","concavity","concave points",
-"symmetry","fractal dimensión"]
-# DATOS DE ENTRADA (COLUMNAS DE ENTRADA EN data)
+#Se seleccionan todas las columnas de entrada
 x = dataset.data
-# DATOS DE SALIDA (COLUMNAS DE SALIDA EN target)
+#Variables de entrada
+entrada=dataset.feature_names
+#CORRIGIENDO VALORES DE ENTRADA para que coincidan con dfquery
+entrada=[u.replace('mean ','') for u in entrada]
+entrada=[u.replace(' error','') for u in entrada]
+entrada=[u.replace('worst ','') for u in entrada]
+entrada=[u.replace('dimension','dimensión') for u in entrada]
+entrada=[u.replace('area','área') for u in entrada]
+#Se selecciona la columna de salida
 y = dataset.target
+#variables de salida
+salidas=dataset.target_names
 # SELECCIONAR DATOS DE train y test
 from sklearn.model_selection import train_test_split
 xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size= 0.2)
